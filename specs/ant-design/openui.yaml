@@ -1,0 +1,36 @@
+name: "antd"
+version: "5.7.0"
+description: "An enterprise-class UI design language and React UI library."
+homepage: "https://ant.design/"
+author: "Ant Group"
+license: "MIT"
+components:
+  Button:
+    description: "To trigger an operation."
+    props:
+      type:
+        description: "Can be set to primary, ghost, dashed, link, text, default."
+        type: string
+        enum: ["primary", "ghost", "dashed", "link", "text", "default"]
+      size:
+        description: "Set the size of button."
+        type: string
+        enum: ["large", "middle", "small"]
+      shape:
+        description: "Can be set to circle, round or omitted."
+        type: string
+        enum: ["circle", "round"]
+  Input:
+    description: "A basic widget for getting the user input is a text field."
+    props:
+      type:
+        description: "The type of input."
+        type: string
+        enum: ["text", "password", "number", "textarea"]
+      size:
+        description: "The size of the input box."
+        type: string
+        enum: ["large", "middle", "small"]
+      disabled:
+        description: "Whether the input is disabled."
+        type: boolean

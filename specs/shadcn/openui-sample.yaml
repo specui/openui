@@ -1,0 +1,35 @@
+name: "@shadcn/ui"
+version: "0.1.0"
+description: "Beautifully designed components built with Radix UI and Tailwind CSS."
+homepage: "https://ui.shadcn.com"
+author: "shadcn"
+license: "MIT"
+components:
+  Button:
+    description: "A clickable button component."
+    props:
+      variant:
+        description: "The visual style of the button."
+        type: string
+        enum:
+          ["default", "destructive", "outline", "secondary", "ghost", "link"]
+      size:
+        description: "The size of the button."
+        type: string
+        enum: ["default", "sm", "lg", "icon"]
+      asChild:
+        description: "Change the default rendered element for the one passed as a child."
+        type: boolean
+  Input:
+    description: "An input field for user text entry."
+    props:
+      type:
+        description: "The type of the input field."
+        type: string
+        enum: ["text", "password", "email", "number", "search", "tel", "url"]
+      placeholder:
+        description: "Placeholder text for the input."
+        type: string
+      disabled:
+        description: "Whether the input is disabled."
+        type: boolean

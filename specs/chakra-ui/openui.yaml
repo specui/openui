@@ -1,0 +1,36 @@
+name: "@chakra-ui/react"
+version: "2.8.0"
+description: "Simple, Modular & Accessible UI Components for your React Applications."
+homepage: "https://chakra-ui.com/"
+author: "Segun Adebayo"
+license: "MIT"
+components:
+  Button:
+    description: "Button component is used to trigger an action or event."
+    props:
+      variant:
+        description: "The visual style of the button."
+        type: string
+        enum: ["solid", "outline", "ghost", "link"]
+      size:
+        description: "The size of the button."
+        type: string
+        enum: ["xs", "sm", "md", "lg"]
+      colorScheme:
+        description: "The color scheme of the button."
+        type: string
+  Input:
+    description: "The Input component is a component that is used to get user input in a text field."
+    props:
+      variant:
+        description: "The visual style of the input."
+        type: string
+        enum: ["outline", "filled", "flushed", "unstyled"]
+      size:
+        description: "The size of the input."
+        type: string
+        enum: ["xs", "sm", "md", "lg"]
+      type:
+        description: "The type of the input field."
+        type: string
+        enum: ["text", "password", "email", "number"]

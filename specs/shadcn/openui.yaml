@@ -1,0 +1,1250 @@
+name: shadcn
+version: 2.1.0
+description: Add components to your apps.
+license: MIT
+components:
+  accordion:
+    description: A vertically stacked set of interactive headings that each reveal a section of content.
+    group: accordion
+    props:
+      asChild:
+        type: boolean
+        default: false
+        description: |
+          Change the default rendered element for the one passed as a child, merging their props and behavior.
+      type:
+        type: string
+        enum:
+          - single
+          - multiple
+        description: |
+          Determines whether one or multiple items can be opened at the same time.
+      value:
+        type: string
+        description: |
+          The controlled value of the item to expand when type is "single". Must be used in conjunction with onValueChange.
+      defaultValue:
+        type: string
+        description: |
+          The value of the item to expand when initially rendered and type is "single". Use when you do not need to control the state of the items.
+      onValueChange:
+        type: object
+        properties:
+          value:
+            type: string
+        description: |
+          Event handler called when the expanded state of an item changes and type is "single".
+      valueMultiple:
+        type: array
+        items:
+          type: string
+        description: |
+          The controlled value of the item to expand when type is "multiple". Must be used in conjunction with onValueChange.
+      defaultValueMultiple:
+        type: array
+        items:
+          type: string
+        description: |
+          The value of the item to expand when initially rendered when type is "multiple". Use when you do not need to control the state of the items.
+      onValueChangeMultiple:
+        type: object
+        properties:
+          value:
+            type: array
+            items:
+              type: string
+        description: |
+          Event handler called when the expanded state of an item changes and type is "multiple".
+      collapsible:
+        type: boolean
+        default: false
+        description: |
+          Allows closing content when clicking trigger for an open item when type is "single".
+      disabled:
+        type: boolean
+        default: false
+        description: |
+          Prevents the user from interacting with the accordion and all its items.
+      dir:
+        type: string
+        enum:
+          - ltr
+          - rtl
+        default: ltr
+        description: |
+          The reading direction of the accordion when applicable. Defaults to LTR (left-to-right).
+      orientation:
+        type: string
+        enum:
+          - horizontal
+          - vertical
+        default: vertical
+        description: |
+          The orientation of the accordion.
+
+  accordionItem:
+    description: Contains all the parts of a collapsible section.
+    parent: accordion
+    group: accordion
+    props:
+      asChild:
+        type: boolean
+        default: false
+        description: |
+          Change the default rendered element for the one passed as a child, merging their props and behavior.
+      disabled:
+        type: boolean
+        default: false
+        description: |
+          Prevents the user from interacting with the item.
+      value:
+        type: string
+        description: A unique value for the item.
+
+  accordionHeader:
+    description: Wraps an `Accordion.Trigger`. Use the `asChild` prop to update it to the appropriate heading level for your page.
+    parent: accordion
+    group: accordion
+    props:
+      asChild:
+        type: boolean
+        default: false
+        description: |
+          Change the default rendered element for the one passed as a child, merging their props and behavior.
+
+  accordionTrigger:
+    description: Toggles the collapsed state of its associated item. It should be nested inside of an `Accordion.Header`.
+    parent: accordionHeader
+    group: accordion
+    props:
+      asChild:
+        type: boolean
+        default: false
+        description: |
+          Change the default rendered element for the one passed as a child, merging their props and behavior.
+
+  accordionContent:
+    description: Contains the collapsible content for an item.
+    parent: accordion
+    group: accordion
+    props:
+      asChild:
+        type: boolean
+        default: false
+        description: |
+          Change the default rendered element for the one passed as a child, merging their props and behavior.
+      forceMount:
+        type: boolean
+        description: |
+          Used to force mounting when more control is needed. Useful when controlling animation with React animation libraries.
+
+  alert:
+    description: An alert component that provides contextual feedback messages for user actions.
+    group: alert
+    props:
+      children:
+        type: string
+        description: The content of the alert message, typically a string.
+
+  alertDescription:
+    description: A description for the alert, providing additional context to the alert message.
+    parent: alert
+    group: alert
+    props:
+      children:
+        type: string
+        description: The content of the alert description, typically a string.
+
+  alertTitle:
+    description: The title for the alert, used to provide a brief summary of the alert's purpose.
+    parent: alert
+    group: alert
+    props:
+      children:
+        type: string
+        description: The content of the alert title, typically a string.
+
+  alertDialog:
+    description: Contains all the parts of an alert dialog.
+    group: alertDialog
+    props:
+      defaultOpen:
+        type: boolean
+        description: The open state of the dialog when it is initially rendered. Use when you do not need to control its open state.
+      open:
+        type: boolean
+        description: |
+          The controlled open state of the dialog. Must be used in conjunction with onOpenChange.
+      onOpenChange:
+        type: object
+        properties:
+          open:
+            type: boolean
+        description: |
+          Event handler called when the open state of the dialog changes.
+
+  alertDialogTrigger:
+    description: A button that opens the dialog.
+    parent: alertDialog
+    group: alertDialog
+    props:
+      asChild:
+        type: boolean
+        default: false
+        description: |
+          Change the default rendered element for the one passed as a child, merging their props and behavior.
+
+  alertDialogPortal:
+    description: Portals your overlay and content parts into the body.
+    parent: alertDialog
+    group: alertDialog
+    props:
+      forceMount:
+        type: boolean
+        description: |
+          Used to force mounting when more control is needed. Useful when controlling animation with React animation libraries.
+          If used on this part, it will be inherited by AlertDialog.Overlay and AlertDialog.Content.
+      container:
+        type: object
+        properties:
+          type: HTMLElement
+        default: document.body
+        description: Specify a container element to portal the content into.
+
+  alertDialogOverlay:
+    description: A layer that covers the inert portion of the view when the dialog is open.
+    parent: alertDialogPortal
+    group: alertDialog
+    props:
+      asChild:
+        type: boolean
+        default: false
+        description: |
+          Change the default rendered element for the one passed as a child, merging their props and behavior.
+      forceMount:
+        type: boolean
+        description: |
+          Used to force mounting when more control is needed. It inherits from AlertDialog.Portal.
+
+  alertDialogContent:
+    description: Contains content to be rendered when the dialog is open.
+    parent: alertDialog
+    group: alertDialog
+    props:
+      asChild:
+        type: boolean
+        default: false
+        description: |
+          Change the default rendered element for the one passed as a child, merging their props and behavior.
+      forceMount:
+        type: boolean
+        description: |
+          Used to force mounting when more control is needed. It inherits from AlertDialog.Portal.
+      onOpenAutoFocus:
+        type: object
+        properties:
+          event:
+            type: Event
+        description: |
+          Event handler called when focus moves to the destructive action after opening. It can be prevented by calling event.preventDefault.
+      onCloseAutoFocus:
+        type: object
+        properties:
+          event:
+            type: Event
+        description: |
+          Event handler called when focus moves to the trigger after closing. It can be prevented by calling event.preventDefault.
+      onEscapeKeyDown:
+        type: object
+        properties:
+          event:
+            type: KeyboardEvent
+        description: |
+          Event handler called when the escape key is down. It can be prevented by calling event.preventDefault.
+
+  alertDialogCancel:
+    description: A button that closes the dialog. This button should be distinguished visually from AlertDialog.Action buttons.
+    parent: alertDialog
+    group: alertDialog
+    props:
+      asChild:
+        type: boolean
+        default: false
+        description: |
+          Change the default rendered element for the one passed as a child, merging their props and behavior.
+
+  alertDialogAction:
+    description: A button that closes the dialog. These buttons should be distinguished visually from the AlertDialog.Cancel button.
+    parent: alertDialog
+    group: alertDialog
+    props:
+      asChild:
+        type: boolean
+        default: false
+        description: |
+          Change the default rendered element for the one passed as a child, merging their props and behavior.
+
+  alertDialogTitle:
+    description: An accessible name to be announced when the dialog is opened.
+    parent: alertDialog
+    group: alertDialog
+    props:
+      asChild:
+        type: boolean
+        default: false
+        description: |
+          Change the default rendered element for the one passed as a child, merging their props and behavior.
+
+  alertDialogDescription:
+    description: An accessible description to be announced when the dialog is opened.
+    parent: alertDialog
+    group: alertDialog
+    props:
+      asChild:
+        type: boolean
+        default: false
+        description: |
+          Change the default rendered element for the one passed as a child, merging their props and behavior.
+
+  aspectRatio:
+    description: Contains the content you want to constrain to a given ratio.
+    group: aspectRatio
+    props:
+      asChild:
+        type: boolean
+        default: false
+        description: |
+          Change the default rendered element for the one passed as a child, merging their props and behavior.
+          Read our Composition guide for more details.
+      ratio:
+        type: number
+        default: 1
+        description: The desired ratio.
+
+  avatar:
+    description: Contains all the parts of an avatar.
+    group: avatar
+    props:
+      asChild:
+        type: boolean
+        default: false
+        description: |
+          Change the default rendered element for the one passed as a child, merging their props and behavior.
+          Read our Composition guide for more details.
+
+  avatarImage:
+    description: The image to render. By default, it will only render when it has loaded. You can use the `onLoadingStatusChange` handler for more control.
+    parent: avatar
+    group: avatar
+    props:
+      asChild:
+        type: boolean
+        default: false
+        description: |
+          Change the default rendered element for the one passed as a child, merging their props and behavior.
+          Read our Composition guide for more details.
+      onLoadingStatusChange:
+        type: object
+        properties:
+          status:
+            type: string
+            enum:
+              - idle
+              - loading
+              - loaded
+              - error
+        description: |
+          A callback providing information about the loading status of the image. Useful for precise control over what to render as the image loads.
+
+  avatarFallback:
+    description: An element that renders when the image hasn't loaded, either while it's loading or if there was an error. You can delay its rendering using `delayMs`.
+    parent: avatar
+    group: avatar
+    props:
+      asChild:
+        type: boolean
+        default: false
+        description: |
+          Change the default rendered element for the one passed as a child, merging their props and behavior.
+          Read our Composition guide for more details.
+      delayMs:
+        type: number
+        description: Useful for delaying rendering so it only appears for those with slower connections.
+
+  badge:
+    description: Displays a badge or a component that looks like a badge.
+    group: badge
+    props:
+      variant:
+        type: string
+        enum:
+          - default
+          - secondary
+          - outline
+          - destructive
+        description: The visual variant of the badge, determining its appearance. Options include "default", "secondary", "outline", and "destructive".
+
+  badgeLink:
+    description: You can use the `badgeVariants` helper to create a link that looks like a badge.
+    parent: badge
+    group: badge
+    props:
+      variant:
+        type: string
+        enum:
+          - default
+          - secondary
+          - outline
+          - destructive
+        description: The visual variant of the badge for a link component. It applies the same options as the `Badge` component.
+
+  breadcrumb:
+    description: Displays the path to the current resource using a hierarchy of links.
+    group: breadcrumb
+    props:
+      children:
+        type: array
+        items:
+          type: object
+        description: The content of the breadcrumb, typically including `BreadcrumbList`, `BreadcrumbItem`, and other related components.
+
+  breadcrumbList:
+    description: A container that holds multiple `BreadcrumbItem` components.
+    parent: breadcrumb
+    group: breadcrumb
+    props:
+      children:
+        type: array
+        items:
+          type: object
+        description: Contains `BreadcrumbItem` components to display the breadcrumb path.
+
+  breadcrumbItem:
+    description: An item that represents a single part of the breadcrumb path.
+    parent: breadcrumbList
+    group: breadcrumb
+    props:
+      children:
+        type: object
+        description: A single breadcrumb link or component, like `BreadcrumbLink` or `BreadcrumbPage`.
+
+  breadcrumbLink:
+    description: A link within the breadcrumb that leads to a specific resource.
+    parent: breadcrumbItem
+    group: breadcrumb
+    props:
+      href:
+        type: string
+        description: The URL to which the breadcrumb link points.
+      asChild:
+        type: boolean
+        default: false
+        description: Allows the breadcrumb link to render a custom link component by passing it as a child.
+
+  breadcrumbPage:
+    description: The current page or resource in the breadcrumb path.
+    parent: breadcrumbItem
+    group: breadcrumb
+    props:
+      children:
+        type: string
+        description: The text for the current page or resource.
+
+  breadcrumbSeparator:
+    description: A separator between breadcrumb items.
+    parent: breadcrumbList
+    group: breadcrumb
+    props:
+      children:
+        type: string
+        description: Custom content for the separator, like an icon or text. Defaults to a visual separator.
+
+  breadcrumbEllipsis:
+    description: A collapsed state component for breadcrumbs that are too long.
+    parent: breadcrumbList
+    group: breadcrumb
+    props:
+      children:
+        type: string
+        description: The ellipsis to display when the breadcrumb is collapsed.
+
+  breadcrumbDropdown:
+    description: A dropdown component that can be used inside `BreadcrumbItem` to display more links in a collapsible menu.
+    parent: breadcrumbItem
+    group: breadcrumb
+    props:
+      children:
+        type: object
+        description: Dropdown menu components, typically including a `DropdownMenuTrigger` and `DropdownMenuContent`.
+
+  button:
+    description: Displays a button or a component that looks like a button.
+    group: button
+    props:
+      variant:
+        type: string
+        enum:
+          - primary
+          - secondary
+          - destructive
+          - outline
+          - ghost
+          - link
+        description: The visual variant of the button, determining its appearance. Options include "primary", "secondary", "destructive", "outline", "ghost", and "link".
+      asChild:
+        type: boolean
+        default: false
+        description: |
+          Allows the button to render a custom child component, like a link or another interactive element, by passing it as a child.
+      loading:
+        type: boolean
+        default: false
+        description: |
+          Indicates if the button is in a loading state.
+      disabled:
+        type: boolean
+        default: false
+        description: |
+          Disables the button, preventing user interaction.
+
+  buttonLink:
+    description: A link styled as a button.
+    parent: button
+    group: button
+    props:
+      href:
+        type: string
+        description: The URL to which the link points.
+      variant:
+        type: string
+        enum:
+          - primary
+          - secondary
+          - destructive
+          - outline
+          - ghost
+          - link
+        description: The visual variant of the link-styled button.
+      asChild:
+        type: boolean
+        default: false
+        description: Allows the button to render a custom link component by passing it as a child.
+
+  buttonWithIcon:
+    description: A button that includes an icon alongside its text.
+    parent: button
+    group: button
+    props:
+      icon:
+        type: string
+        description: The icon to display within the button.
+      variant:
+        type: string
+        enum:
+          - primary
+          - secondary
+          - destructive
+          - outline
+          - ghost
+          - link
+        description: The visual variant of the button.
+      loading:
+        type: boolean
+        default: false
+        description: Indicates if the button is in a loading state.
+      disabled:
+        type: boolean
+        default: false
+        description: Disables the button, preventing user interaction.
+
+  buttonIcon:
+    description: A button consisting of only an icon.
+    parent: button
+    group: button
+    props:
+      icon:
+        type: string
+        description: The icon to display within the button.
+      variant:
+        type: string
+        enum:
+          - primary
+          - secondary
+          - destructive
+          - outline
+          - ghost
+          - link
+        description: The visual variant of the icon button.
+      loading:
+        type: boolean
+        default: false
+        description: Indicates if the button is in a loading state.
+      disabled:
+        type: boolean
+        default: false
+        description: Disables the button, preventing user interaction.
+
+  calendar:
+    description: A date field component that allows users to enter and edit dates.
+    group: calendar
+    props:
+      mode:
+        type: string
+        enum:
+          - single
+          - multiple
+          - range
+        description: The selection mode of the calendar, allowing either single, multiple, or range selection.
+      selected:
+        type: string
+        format: date
+        description: The currently selected date(s). Can be a single date, an array of dates, or a range, depending on the mode.
+      onSelect:
+        type: object
+        properties:
+          date:
+            type: string
+            format: date
+        description: A callback function that triggers when a date is selected. The function receives the selected date.
+      className:
+        type: string
+        description: Optional CSS classes to style the calendar component.
+
+  calendarDatePicker:
+    description: A date picker built using the `Calendar` component.
+    parent: calendar
+    group: calendar
+    props:
+      mode:
+        type: string
+        enum:
+          - single
+          - multiple
+          - range
+        description: The selection mode of the date picker.
+      selected:
+        type: string
+        format: date
+        description: The currently selected date(s) in the date picker.
+      onSelect:
+        type: object
+        properties:
+          date:
+            type: string
+            format: date
+        description: A callback function that triggers when a date is selected.
+      className:
+        type: string
+        description: Optional CSS classes to style the date picker.
+
+  card:
+    description: Displays a card with header, content, and footer.
+    group: card
+    props:
+      children:
+        type: array
+        items:
+          type: object
+        description: The content of the card, typically including `CardHeader`, `CardContent`, and `CardFooter`.
+
+  cardHeader:
+    description: The header section of the card, typically containing the title and description.
+    parent: card
+    group: card
+    props:
+      children:
+        type: array
+        items:
+          type: object
+        description: Content inside the card header, typically including `CardTitle` and `CardDescription`.
+
+  cardTitle:
+    description: The title of the card.
+    parent: cardHeader
+    group: card
+    props:
+      children:
+        type: string
+        description: The text content of the card title.
+
+  cardDescription:
+    description: A description under the card title, providing additional context.
+    parent: cardHeader
+    group: card
+    props:
+      children:
+        type: string
+        description: The text content of the card description.
+
+  cardContent:
+    description: The main content of the card.
+    parent: card
+    group: card
+    props:
+      children:
+        type: string
+        description: The text or elements that make up the main body of the card.
+
+  cardFooter:
+    description: The footer section of the card, typically containing actions or supplementary information.
+    parent: card
+    group: card
+    props:
+      children:
+        type: string
+        description: The text or elements displayed in the card footer.
+
+  carousel:
+    description: A lightweight, customizable carousel with rich API and extensibility options.
+    group: carousel
+    props:
+      active:
+        type: boolean
+        default: true
+        description: |
+          Setting this to false will not activate or deactivate the carousel. Useful with the breakpoints option to toggle the carousel's active/inactive state.
+      align:
+        type: string
+        enum:
+          - start
+          - center
+          - end
+        description: |
+          Aligns slides relative to the carousel viewport. You can also provide a custom callback for alignment.
+      axis:
+        type: string
+        default: "x"
+        description: |
+          Choose scroll axis between `x` and `y`. Ensure that slides stack horizontally or vertically with CSS to match this option.
+      breakpoints:
+        type: object
+        description: |
+          An object with options to be applied at specific breakpoints, overriding the root-level options.
+      container:
+        type: string
+        description: |
+          Specify a custom container element for the slides, either via CSS selector string or as a node element.
+      containScroll:
+        type: string
+        enum:
+          - trimSnaps
+          - keepSnaps
+        default: "trimSnaps"
+        description: |
+          Clear leading/trailing empty space for excessive scrolling, using either `trimSnaps` or `keepSnaps`.
+      direction:
+        type: string
+        enum:
+          - ltr
+          - rtl
+        default: "ltr"
+        description: |
+          Choose content direction between `ltr` and `rtl`.
+      dragFree:
+        type: boolean
+        default: false
+        description: Enables momentum scrolling.
+      dragThreshold:
+        type: number
+        default: 10
+        description: |
+          Drag threshold in pixels. Controls when clicks are fired, affecting mouse events rather than touch events.
+      duration:
+        type: number
+        default: 25
+        description: |
+          Set the scroll duration when triggered by any API method. Values between 20 and 60 are recommended.
+      inViewThreshold:
+        type: number
+        default: 0
+        description: |
+          The Intersection Observer threshold applied to all slides.
+      loop:
+        type: boolean
+        default: false
+        description: Enables infinite looping of the carousel.
+      skipSnaps:
+        type: boolean
+        default: false
+        description: |
+          Allows the carousel to skip scroll snaps if dragged vigorously. This option is ignored if `dragFree` is enabled.
+      slides:
+        type: array
+        items:
+          type: string
+        description: |
+          Specify custom slide elements. By default, all direct child elements of the container are considered slides.
+      slidesToScroll:
+        type: number
+        default: 1
+        description: Group slides together and adjust drag interactions and navigation accordingly.
+      startIndex:
+        type: number
+        default: 0
+        description: |
+          Set the initial scroll snap point by index.
+      watchDrag:
+        type: boolean
+        default: true
+        description: |
+          Enable or disable mouse/touch interactions for scrolling.
+      watchFocus:
+        type: boolean
+        default: true
+        description: |
+          Automatically scroll to a slide when it receives focus.
+      watchResize:
+        type: boolean
+        default: true
+        description: |
+          Watch for size changes in the carousel container or slides and reinitialize the carousel if necessary.
+      watchSlides:
+        type: boolean
+        default: true
+        description: |
+          Watch for added or removed slides in the container and reinitialize the carousel if necessary.
+
+  chart:
+    description: Beautiful charts. Built using Recharts.
+    group: chart
+    props:
+      title:
+        type: string
+        description: The title of the chart.
+      description:
+        type: string
+        description: A description of the chart component.
+      data:
+        type: array
+        description: The data to be used in the chart.
+      config:
+        type: object
+        description: Configuration for the chart, including labels, colors, and themes.
+      minHeight:
+        type: string
+        description: Minimum height required for responsiveness.
+      colors:
+        type: object
+        description: Color variables for theming in light/dark modes.
+      tooltip:
+        type: object
+        description: Tooltip configuration for displaying data on hover.
+      legend:
+        type: object
+        description: Configuration for adding a legend to the chart.
+
+  checkbox:
+    description: A control that allows the user to toggle between checked and not checked.
+    group: checkbox
+    props:
+      asChild:
+        type: boolean
+        default: false
+        description: |
+          Change the default rendered element for the one passed as a child, merging their props and behavior.
+      defaultChecked:
+        anyOf:
+          - type: boolean
+          - enum: ["indeterminate"]
+        description: The checked state of the checkbox when it is initially rendered.
+      checked:
+        anyOf:
+          - type: boolean
+          - enum: ["indeterminate"]
+        description: |
+          The controlled checked state of the checkbox. Must be used in conjunction with `onCheckedChange`.
+      onCheckedChange:
+        type: object
+        properties:
+          checked:
+            anyOf:
+              - type: boolean
+              - enum: ["indeterminate"]
+        description: |
+          Event handler called when the checked state of the checkbox changes.
+      disabled:
+        type: boolean
+        description: When true, prevents the user from interacting with the checkbox.
+      required:
+        type: boolean
+        description: When true, indicates that the checkbox must be checked before the form can be submitted.
+      name:
+        type: string
+        description: The name of the checkbox. Submitted with its owning form as part of a name/value pair.
+      value:
+        type: string
+        default: on
+        description: The value given as data when submitted with a name.
+      aria:
+        type: string
+        description: ARIA attributes for accessibility, following the WAI-ARIA Checkbox pattern.
+
+  collapsible:
+    description: An interactive component which expands/collapses a panel.
+    group: collapsible
+    props:
+      asChild:
+        type: boolean
+        default: false
+        description: |
+          Change the default rendered element for the one passed as a child, merging their props and behavior.
+      defaultOpen:
+        type: boolean
+        description: |
+          The open state of the collapsible when it is initially rendered. Use when you do not need to control its open state.
+      open:
+        type: boolean
+        description: |
+          The controlled open state of the collapsible. Must be used in conjunction with `onOpenChange`.
+      onOpenChange:
+        type: object
+        properties:
+          open:
+            type: boolean
+        description: |
+          Event handler called when the open state of the collapsible changes.
+      disabled:
+        type: boolean
+        description: |
+          When true, prevents the user from interacting with the collapsible.
+
+  collapsibleTrigger:
+    description: The button that toggles the collapsible.
+    parent: collapsible
+    group: collapsible
+    props:
+      asChild:
+        type: boolean
+        default: false
+        description: |
+          Change the default rendered element for the one passed as a child, merging their props and behavior.
+
+  collapsibleContent:
+    description: The component that contains the collapsible content.
+    parent: collapsible
+    group: collapsible
+    props:
+      asChild:
+        type: boolean
+        default: false
+        description: |
+          Change the default rendered element for the one passed as a child, merging their props and behavior.
+      forceMount:
+        type: boolean
+        description: |
+          Used to force mounting when more control is needed. Useful when controlling animation with React animation libraries.
+
+  combobox:
+    description: Autocomplete input and command palette with a list of suggestions.
+    group: combobox
+    props:
+      open:
+        type: boolean
+        description: Controls whether the combobox is open or closed.
+      value:
+        type: string
+        description: The currently selected value of the combobox.
+      frameworks:
+        type: array
+        items:
+          type: object
+          properties:
+            value:
+              type: string
+              description: The unique identifier of the framework.
+            label:
+              type: string
+              description: The human-readable name of the framework.
+      onOpenChange:
+        type: object
+        properties:
+          open:
+            type: boolean
+        description: Event handler called when the open state of the combobox changes.
+      onSelect:
+        type: object
+        properties:
+          value:
+            type: string
+        description: Event handler called when a framework is selected.
+
+  comboboxTrigger:
+    description: The trigger button for opening the combobox.
+    parent: combobox
+    group: combobox
+    props:
+      ariaExpanded:
+        type: boolean
+        description: Controls the `aria-expanded` attribute based on the combobox's open state.
+      label:
+        type: string
+        description: The label of the button, usually the selected framework or a placeholder.
+
+  comboboxList:
+    description: The list of frameworks shown in the combobox.
+    parent: combobox
+    group: combobox
+    props:
+      frameworks:
+        type: array
+        items:
+          type: object
+          properties:
+            value:
+              type: string
+            label:
+              type: string
+        description: The list of available frameworks.
+      onSelect:
+        type: object
+        properties:
+          value:
+            type: string
+        description: Event handler called when a framework is selected.
+
+  comboboxItem:
+    description: The item component representing an individual framework in the list.
+    parent: comboboxList
+    group: combobox
+    props:
+      value:
+        type: string
+        description: The unique identifier of the framework.
+      label:
+        type: string
+        description: The human-readable name of the framework.
+      selected:
+        type: boolean
+        description: Indicates whether the item is currently selected.
+
+  command:
+    description: Fast, composable, unstyled command menu for React.
+    group: command
+    props:
+      placeholder:
+        type: string
+        description: The placeholder text for the command input.
+      open:
+        type: boolean
+        description: Controls whether the command menu is open or closed.
+      onOpenChange:
+        type: object
+        properties:
+          open:
+            type: boolean
+        description: Event handler called when the open state of the command menu changes.
+
+  commandInput:
+    description: The input element for typing commands or searching.
+    parent: command
+    group: command
+    props:
+      placeholder:
+        type: string
+        description: The placeholder text for the command input.
+      value:
+        type: string
+        description: The current value of the input.
+      onInputChange:
+        type: object
+        properties:
+          value:
+            type: string
+        description: Event handler called when the input value changes.
+
+  commandList:
+    description: The list of items to be displayed in the command menu.
+    parent: command
+    group: command
+    props:
+      items:
+        type: array
+        items:
+          type: object
+          properties:
+            label:
+              type: string
+            value:
+              type: string
+        description: The list of available command items.
+
+  commandItem:
+    description: Represents a selectable item in the command menu.
+    parent: commandList
+    group: command
+    props:
+      label:
+        type: string
+        description: The human-readable label for the command item.
+      value:
+        type: string
+        description: The unique value for the command item.
+      selected:
+        type: boolean
+        description: Indicates whether the item is currently selected.
+      onSelect:
+        type: object
+        properties:
+          value:
+            type: string
+        description: Event handler called when the command item is selected.
+
+  commandGroup:
+    description: A group of related command items.
+    parent: commandList
+    group: command
+    props:
+      heading:
+        type: string
+        description: The heading text for the group.
+      items:
+        type: array
+        items:
+          type: object
+          properties:
+            label:
+              type: string
+            value:
+              type: string
+        description: The list of items in the group.
+
+  commandDialog:
+    description: A command menu displayed inside a dialog.
+    parent: command
+    group: command
+    props:
+      open:
+        type: boolean
+        description: Controls whether the command dialog is open or closed.
+      onOpenChange:
+        type: object
+        properties:
+          open:
+            type: boolean
+        description: Event handler called when the open state of the command dialog changes.
+
+  contextMenu:
+    description: Displays a menu located at the pointer, triggered by a right click or a long press.
+    group: contextMenu
+    props:
+      dir:
+        type: string
+        enum: ["ltr", "rtl"]
+        description: The reading direction of submenus. If omitted, defaults to "ltr".
+      modal:
+        type: boolean
+        default: true
+        description: Determines if the context menu is in modal mode, preventing outside interactions.
+      onOpenChange:
+        type: object
+        properties:
+          open:
+            type: boolean
+        description: Event handler called when the open state of the context menu changes.
+
+  contextMenuTrigger:
+    description: The component that triggers the context menu on right-click.
+    parent: contextMenu
+    group: contextMenu
+    props:
+      asChild:
+        type: boolean
+        default: false
+        description: Allows rendering of a custom component as the trigger.
+      disabled:
+        type: boolean
+        default: false
+        description: When true, disables opening the context menu via right-click.
+
+  contextMenuContent:
+    description: The content displayed when the context menu is open.
+    parent: contextMenu
+    group: contextMenu
+    props:
+      asChild:
+        type: boolean
+        default: false
+        description: Allows rendering of custom content.
+      loop:
+        type: boolean
+        default: false
+        description: Enables keyboard focus looping from last item to first, and vice versa.
+      forceMount:
+        type: boolean
+        description: Forces the component to mount, useful for animations.
+      alignOffset:
+        type: number
+        default: 0
+        description: Adjusts the vertical alignment of the content.
+      avoidCollisions:
+        type: boolean
+        default: true
+        description: Prevents the content from colliding with the viewport edges.
+
+  contextMenuItem:
+    description: The item displayed in the context menu.
+    parent: contextMenuContent
+    group: contextMenu
+    props:
+      asChild:
+        type: boolean
+        default: false
+        description: Allows rendering of a custom component as an item.
+      disabled:
+        type: boolean
+        description: Prevents interaction with the item.
+      onSelect:
+        type: object
+        properties:
+          event:
+            type: object
+        description: Event handler called when the item is selected.
+
+  contextMenuCheckboxItem:
+    description: A checkbox item in the context menu.
+    parent: contextMenuContent
+    group: contextMenu
+    props:
+      checked:
+        type: string
+        enum: ["true", "false", "indeterminate"]
+        description: Controls the checked state of the checkbox item.
+      onCheckedChange:
+        type: object
+        properties:
+          checked:
+            type: string
+        description: Event handler called when the checked state changes.
+
+  contextMenuRadioGroup:
+    description: A group of radio items within the context menu.
+    parent: contextMenuContent
+    group: contextMenu
+    props:
+      value:
+        type: string
+        description: The selected value of the radio group.
+      onValueChange:
+        type: object
+        properties:
+          value:
+            type: string
+        description: Event handler called when the value changes.
+
+  contextMenuSub:
+    description: Submenu component within the context menu.
+    parent: contextMenuContent
+    group: contextMenu
+    props:
+      defaultOpen:
+        type: boolean
+        description: Determines if the submenu is open initially.
+      open:
+        type: boolean
+        description: Controls the open state of the submenu.
+      onOpenChange:
+        type: object
+        properties:
+          open:
+            type: boolean
+        description: Event handler called when the submenu's open state changes.

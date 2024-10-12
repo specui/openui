@@ -1,6 +1,10 @@
+import "./globals.css";
+
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import "./globals.css";
+
+import { Header } from "./components/header";
+import { Footer } from "./components/footer";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -15,7 +19,8 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
   title: "OpenUI",
-  description: "OpenUI is a specification for standardizing UI components across different libraries and frameworks. It promotes interoperability and consistent user experiences by defining common properties and behaviors for UI elements.",
+  description:
+    "OpenUI is a specification for standardizing UI components across different libraries and frameworks. It promotes interoperability and consistent user experiences by defining common properties and behaviors for UI elements.",
 };
 
 export default function RootLayout({
@@ -28,7 +33,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );
