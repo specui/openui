@@ -1,0 +1,8 @@
+name: "@adobe/react-spectrum"
+version: 3.37.0
+description: Spectrum UI components in React
+license: Apache-2.0
+components:
+  avatar:
+    src:
+      type: string

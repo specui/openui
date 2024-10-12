@@ -5,32 +5,303 @@ homepage: "https://mui.com/"
 author: "MUI Team"
 license: "MIT"
 components:
-  Button:
-    description: "Buttons allow users to take actions, and make choices, with a single tap."
+  accordion:
+    description: Accordion is a collapsible component that wraps content inside an expanding panel.
+    category: layout
     props:
-      variant:
-        description: "The variant to use."
+      children:
         type: string
-        enum: ["text", "outlined", "contained"]
-      color:
-        description: "The color of the component."
-        type: string
-        enum: ["default", "inherit", "primary", "secondary"]
-      size:
-        description: "The size of the button."
-        type: string
-        enum: ["small", "medium", "large"]
-  TextField:
-    description: "A convenient wrapper for Input with additional functionality."
-    props:
-      variant:
-        description: "The variant to use."
-        type: string
-        enum: ["standard", "outlined", "filled"]
-      type:
-        description: "Type of the input element."
-        type: string
-        enum: ["text", "password", "number", "search", "email"]
-      disabled:
-        description: "If true, the input element is disabled."
+        description: The content of the Accordion component.
+      classes:
+        type: object
+        additionalProperties:
+          type: string
+        description: Override or extend the styles applied to the component.
+      defaultExpanded:
         type: boolean
+        default: false
+        description: If true, the accordion is expanded by default.
+      disabled:
+        type: boolean
+        default: false
+        description: If true, the accordion is disabled.
+      disableGutters:
+        type: boolean
+        default: false
+        description: If true, removes the margin between two expanded accordion items and the increase in height.
+      expanded:
+        type: boolean
+        description: Controls whether the accordion is expanded or collapsed. Enables controlled behavior.
+      onChange:
+        type: function
+        description: "Callback fired when the expand/collapse state changes. Signature: `(event: React.SyntheticEvent, expanded: boolean) => void`."
+      sx:
+        type:
+          - object
+          - array
+          - string
+        description: The system prop that allows defining system overrides and additional CSS styles.
+      TransitionComponent:
+        type: string
+        description: The component used for transition animations when expanding/collapsing the accordion.
+      TransitionProps:
+        type: object
+        description: Props applied to the transition element. By default, the element is based on the React Transition component.
+      heading:
+        type: object
+        description: The component that renders the heading of the accordion.
+      transition:
+        type: object
+        description: The component that renders the transition. Defaults to `Collapse`.
+
+  accordionDetails:
+    description: AccordionDetails is used to display the content inside the expanded accordion.
+    props:
+      children:
+        type: string
+        description: The content of the AccordionDetails component.
+      classes:
+        type: object
+        additionalProperties:
+          type: string
+        description: Override or extend the styles applied to the component.
+      sx:
+        type:
+          - object
+          - array
+          - string
+        description: The system prop that allows defining system overrides and additional CSS styles.
+
+  accordionActions:
+    description: AccordionActions contains the actions for an Accordion, usually placed at the bottom of the expanded area.
+    props:
+      children:
+        type: string
+        description: The content of the AccordionActions component.
+      classes:
+        type: object
+        additionalProperties:
+          type: string
+        description: Override or extend the styles applied to the component.
+      disableSpacing:
+        type: boolean
+        default: false
+        description: If true, removes the spacing between the actions.
+      sx:
+        type:
+          - object
+          - array
+          - string
+        description: The system prop that allows defining system overrides and additional CSS styles.
+
+  accordionSummary:
+    description: AccordionSummary is used as the clickable area that controls the expansion and collapse of the accordion.
+    category: layout
+    props:
+      children:
+        type: string
+        description: The content of the AccordionSummary component.
+      classes:
+        type: object
+        additionalProperties:
+          type: string
+        description: Override or extend the styles applied to the component.
+      expandIcon:
+        type: string
+        description: The icon to display as the expand indicator, typically shown on the right side of the accordion.
+      sx:
+        type:
+          - object
+          - array
+          - string
+        description: The system prop that allows defining system overrides as well as additional CSS styles.
+
+  alert:
+    description: Alert is used to display important information in a prominent way. It supports various severities like success, info, warning, and error.
+    category: feedback
+    props:
+      action:
+        type: string
+        description: The action to display. It renders after the message, at the end of the alert.
+      classes:
+        type: object
+        additionalProperties:
+          type: string
+        description: Override or extend the styles applied to the component.
+      closeText:
+        type: string
+        default: "Close"
+        description: Override the default label for the close popup icon button.
+      color:
+        type: string
+        enum: ["success", "info", "warning", "error"]
+        description: The color of the alert. If not provided, the value is taken from the severity prop.
+      components:
+        type: object
+        description: The components used for each slot inside the alert.
+      componentsProps:
+        type: object
+        description: The extra props for the slot components. You can override the existing props or add new ones.
+      severity:
+        type: string
+        enum: ["success", "info", "warning", "error"]
+        default: "success"
+        description: The severity of the alert. This defines the color and icon used.
+      icon:
+        type: string
+        description: Override the icon displayed before the children. Set to false to remove the icon.
+      role:
+        type: string
+        default: "alert"
+        description: The ARIA role attribute of the element.
+      iconMapping:
+        type: object
+        description: Customize the icon mapping for different severities.
+      onClose:
+        type: function
+        description: Callback fired when the component requests to be closed.
+      variant:
+        type: string
+        enum: ["standard", "filled", "outlined"]
+        default: "standard"
+        description: The variant to use for the alert.
+      sx:
+        type: object
+        description: The system prop that allows defining system overrides as well as additional CSS styles.
+
+  alertTitle:
+    description: AlertTitle is used to display the title or heading within an Alert component.
+    category: feedback
+    props:
+      children:
+        type: string
+        description: The content of the component.
+      classes:
+        type: object
+        additionalProperties:
+          type: string
+        description: Override or extend the styles applied to the component.
+      sx:
+        type: object
+        description: The system prop that allows defining system overrides as well as additional CSS styles.
+
+  appBar:
+    description: AppBar is a wrapper component for placing elements at the top of the page.
+    category: navigation
+    props:
+      classes:
+        type: object
+        additionalProperties:
+          type: string
+        description: Override or extend the styles applied to the component.
+      color:
+        type: string
+        enum:
+          [
+            "primary",
+            "secondary",
+            "default",
+            "transparent",
+            "error",
+            "info",
+            "success",
+            "warning",
+          ]
+        description: The color of the component, supporting both default and custom theme colors.
+      enableColorOnDark:
+        type: boolean
+        default: false
+        description: If true, the color prop is applied in dark mode.
+      position:
+        type: string
+        enum: ["fixed", "absolute", "sticky", "static", "relative"]
+        default: "fixed"
+        description: The positioning type of the AppBar.
+      sx:
+        type: object
+        description: The system prop that allows defining system overrides as well as additional CSS styles.
+
+  autocomplete:
+    description: The Autocomplete component provides a text input with suggestions, allowing users to select from a list of options.
+    category: form
+    props:
+      classes:
+        type: object
+        additionalProperties:
+          type: string
+        description: Override or extend the styles applied to the component.
+      clearIcon:
+        type: string
+        description: The icon to display in place of the default clear icon.
+      clearText:
+        type: string
+        description: Override the default text for the clear icon button.
+        default: "Clear"
+      closeText:
+        type: string
+        description: Override the default text for the close popup icon button.
+        default: "Close"
+      disabled:
+        type: boolean
+        default: false
+        description: If true, the input will be disabled.
+      disablePortal:
+        type: boolean
+        default: false
+        description: If true, the Popper content will render under the parent component's DOM hierarchy.
+      forcePopupIcon:
+        type: string
+        enum: ["true", "false", "auto"]
+        default: "auto"
+        description: Force the visibility of the popup icon.
+      fullWidth:
+        type: boolean
+        default: false
+        description: If true, the input will take up the full width of its container.
+      loading:
+        type: boolean
+        default: false
+        description: If true, the component is in a loading state and shows the loading text.
+      loadingText:
+        type: string
+        default: "Loading…"
+        description: Text to display while loading options.
+      limitTags:
+        type: number
+        default: -1
+        description: The maximum number of tags visible when not focused.
+      noOptionsText:
+        type: string
+        default: "No options"
+        description: Text to display when no options are available.
+      openText:
+        type: string
+        default: "Open"
+        description: Override the default text for the open popup icon button.
+      popupIcon:
+        type: string
+        description: The icon to display in place of the default popup icon.
+      readOnly:
+        type: boolean
+        default: false
+        description: If true, the input becomes readonly, and selected tags cannot be deleted.
+      renderGroup:
+        type: function
+        description: Function to render groups in the listbox.
+      renderInput:
+        type: function
+        description: Function to render the input element.
+      renderOption:
+        type: function
+        description: Function to render an option in the listbox.
+      renderTags:
+        type: function
+        description: Function to render the selected tags.
+      size:
+        type: string
+        enum: ["small", "medium"]
+        default: "medium"
+        description: The size of the component.
+      sx:
+        type: object
+        description: The system prop that allows defining system overrides and additional CSS styles.

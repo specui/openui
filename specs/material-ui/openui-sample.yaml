@@ -1,0 +1,36 @@
+name: "@mui/material"
+version: "5.14.0"
+description: "React components that implement Google's Material Design."
+homepage: "https://mui.com/"
+author: "MUI Team"
+license: "MIT"
+components:
+  Button:
+    description: "Buttons allow users to take actions, and make choices, with a single tap."
+    props:
+      variant:
+        description: "The variant to use."
+        type: string
+        enum: ["text", "outlined", "contained"]
+      color:
+        description: "The color of the component."
+        type: string
+        enum: ["default", "inherit", "primary", "secondary"]
+      size:
+        description: "The size of the button."
+        type: string
+        enum: ["small", "medium", "large"]
+  TextField:
+    description: "A convenient wrapper for Input with additional functionality."
+    props:
+      variant:
+        description: "The variant to use."
+        type: string
+        enum: ["standard", "outlined", "filled"]
+      type:
+        description: "Type of the input element."
+        type: string
+        enum: ["text", "password", "number", "search", "email"]
+      disabled:
+        description: "If true, the input element is disabled."
+        type: boolean

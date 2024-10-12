@@ -3,6 +3,722 @@ version: 3.37.0
 description: Spectrum UI components in React
 license: Apache-2.0
 components:
-  avatar:
-    src:
-      type: string
+  actionBar:
+    description: ActionBar provides a container for actions in a toolbar-like layout.
+    category: "actions"
+    props:
+      aria-label:
+        type: string
+        description: Provides an accessible name for the action bar.
+      isEmphasized:
+        type: boolean
+        description: Determines whether the ActionBar should be rendered with a more prominent style.
+      onAction:
+        type: function
+        description: "Callback function when an action is triggered. Signature: (key: Key) => void"
+      selectionMode:
+        type: string
+        enum: ["none", "single", "multiple"]
+        description: Defines how selections are handled within the ActionBar.
+      children:
+        type: node
+        description: The actions to be displayed within the ActionBar.
+
+  actionBarItem:
+    description: Individual action items within the ActionBar.
+    props:
+      key:
+        type: string
+        description: Unique key for each action item, typically used for selection.
+      aria-label:
+        type: string
+        description: Provides an accessible name for the action item.
+      isDisabled:
+        type: boolean
+        description: Whether the action item is disabled.
+      onPress:
+        type: function
+        description: "Callback function when the action item is pressed. Signature: (event: any) => void"
+
+  actionMenu:
+    description: ActionMenu is a dropdown menu for displaying a list of actions or selectable items.
+    category: "actions"
+    props:
+      aria-label:
+        type: string
+        description: Provides an accessible name for the ActionMenu.
+      disabledKeys:
+        type: array
+        description: List of keys for items that are disabled.
+      onAction:
+        type: function
+        description: Callback when an action is triggered.
+      children:
+        type: node
+        description: The items to display in the ActionMenu, typically MenuItems or Section components.
+
+  listBox:
+    description: ListBox displays a list of options or items from which the user can choose.
+    category: "list"
+    props:
+      aria-label:
+        type: string
+        description: Provides an accessible name for the ListBox.
+      selectedKeys:
+        type: array
+        description: The keys of selected items.
+      disabledKeys:
+        type: array
+        description: Keys for items that should be disabled.
+      selectionMode:
+        type: string
+        enum: ["none", "single", "multiple"]
+        description: Defines how selections are handled in the ListBox.
+      onSelectionChange:
+        type: function
+        description: Callback when the selection changes.
+      children:
+        type: node
+        description: The list of items to display in the ListBox.
+
+  listView:
+    description: ListView is a layout that displays a collection of items in a single column.
+    category: "list"
+    props:
+      aria-label:
+        type: string
+        description: Provides an accessible name for the ListView.
+      disabledKeys:
+        type: array
+        description: Keys for items that are disabled.
+      selectionMode:
+        type: string
+        enum: ["none", "single", "multiple"]
+        description: Defines how selections are handled within the ListView.
+      selectedKeys:
+        type: array
+        description: The keys of selected items.
+      onAction:
+        type: function
+        description: Callback when an item is activated.
+      onSelectionChange:
+        type: function
+        description: Callback when the selection changes.
+      children:
+        type: node
+        description: The items to display in the ListView.
+
+  menu:
+    description: Menu is a list of actions or options presented to the user for selection.
+    category: "actions"
+    props:
+      aria-label:
+        type: string
+        description: Provides an accessible name for the Menu.
+      disabledKeys:
+        type: array
+        description: List of keys for items that are disabled.
+      onAction:
+        type: function
+        description: Callback when an action is triggered.
+      children:
+        type: node
+        description: The items to display in the Menu, typically MenuItems or Section components.
+
+  menuTrigger:
+    description: MenuTrigger is a component used to open or trigger a Menu.
+    category: "overlay"
+    props:
+      align:
+        type: string
+        enum: ["start", "end"]
+        description: Alignment of the menu relative to the trigger.
+      direction:
+        type: string
+        enum: ["top", "bottom", "left", "right"]
+        description: The direction in which the menu will open.
+      shouldFlip:
+        type: boolean
+        description: Whether the menu should flip when it reaches the edge of the screen.
+      trigger:
+        type: string
+        enum: ["press", "longPress"]
+        description: Determines the event that opens the menu.
+
+  tableView:
+    description: TableView is a component for displaying tabular data in a structured way.
+    category: "table"
+    props:
+      aria-label:
+        type: string
+        description: Provides an accessible name for the TableView.
+      selectionMode:
+        type: string
+        enum: ["none", "single", "multiple"]
+        description: Defines how selections are handled within the TableView.
+      selectedKeys:
+        type: array
+        description: The keys of selected items.
+      onSelectionChange:
+        type: function
+        description: Callback when the selection changes.
+      children:
+        type: node
+        description: The columns and rows to display in the TableView.
+
+  tagGroup:
+    description: TagGroup is used to display a group of tags, with optional remove functionality.
+    category: "data-display"
+    props:
+      aria-label:
+        type: string
+        description: Provides an accessible name for the TagGroup.
+      items:
+        type: array
+        description: The tags to display.
+      onRemove:
+        type: function
+        description: Callback when a tag is removed.
+
+  treeView:
+    description: TreeView is used to display a hierarchical list of items with expandable and collapsible nodes.
+    category: "navigation"
+    props:
+      aria-label:
+        type: string
+        description: Provides an accessible name for the TreeView.
+      expandedKeys:
+        type: array
+        description: Keys for nodes that are expanded.
+      selectedKeys:
+        type: array
+        description: The keys of selected items.
+      onExpandChange:
+        type: function
+        description: Callback when the expand state of a node changes.
+      onSelectionChange:
+        type: function
+        description: Callback when the selection changes.
+      children:
+        type: node
+        description: The tree nodes to display in the TreeView.
+
+  colorArea:
+    description: ColorArea allows users to select a color by manipulating its hue and saturation.
+    category: "input"
+    props:
+      aria-label:
+        type: string
+        description: Provides an accessible name for the ColorArea.
+      value:
+        type: object
+        description: The current color value.
+      defaultValue:
+        type: object
+        description: The default color value when uncontrolled.
+      onChange:
+        type: function
+        description: Callback when the color changes.
+      disabled:
+        type: boolean
+        description: Whether the component is disabled.
+      isReadOnly:
+        type: boolean
+        description: Whether the component is read-only.
+
+  colorField:
+    description: ColorField is an input field that allows users to enter a color value.
+    category: "input"
+    props:
+      aria-label:
+        type: string
+        description: Provides an accessible name for the ColorField.
+      value:
+        type: string
+        description: The current color value.
+      defaultValue:
+        type: string
+        description: The default color value when uncontrolled.
+      onChange:
+        type: function
+        description: Callback when the color value changes.
+      disabled:
+        type: boolean
+        description: Whether the field is disabled.
+      isReadOnly:
+        type: boolean
+        description: Whether the field is read-only.
+
+  colorPicker:
+    description: ColorPicker allows users to select and adjust colors using various visual tools.
+    category: "input"
+    props:
+      aria-label:
+        type: string
+        description: Provides an accessible name for the ColorPicker.
+      value:
+        type: object
+        description: The current color value.
+      defaultValue:
+        type: object
+        description: The default color value when uncontrolled.
+      onChange:
+        type: function
+        description: Callback when the color changes.
+      disabled:
+        type: boolean
+        description: Whether the ColorPicker is disabled.
+      isReadOnly:
+        type: boolean
+        description: Whether the ColorPicker is read-only.
+
+  colorSlider:
+    description: ColorSlider allows users to adjust a specific color channel, like hue or brightness.
+    category: "input"
+    props:
+      aria-label:
+        type: string
+        description: Provides an accessible name for the ColorSlider.
+      channel:
+        type: string
+        enum: ["hue", "saturation", "brightness", "alpha"]
+        description: Specifies which color channel the slider will adjust.
+      value:
+        type: number
+        description: The current value of the color channel.
+      defaultValue:
+        type: number
+        description: The default value of the color channel when uncontrolled.
+      onChange:
+        type: function
+        description: Callback when the color channel changes.
+      disabled:
+        type: boolean
+        description: Whether the slider is disabled.
+      isReadOnly:
+        type: boolean
+        description: Whether the slider is read-only.
+
+  colorSwatch:
+    description: ColorSwatch is a simple component that displays a color.
+    category: "display"
+    props:
+      color:
+        type: string
+        description: The color value to display.
+      aria-label:
+        type: string
+        description: Provides an accessible name for the ColorSwatch.
+
+  colorSwatchPicker:
+    description: ColorSwatchPicker allows users to select a color from a predefined set of colors.
+    category: "input"
+    props:
+      aria-label:
+        type: string
+        description: Provides an accessible name for the ColorSwatchPicker.
+      value:
+        type: string
+        description: The currently selected color value.
+      defaultValue:
+        type: string
+        description: The default color value when uncontrolled.
+      onChange:
+        type: function
+        description: Callback when the selected color changes.
+      disabled:
+        type: boolean
+        description: Whether the ColorSwatchPicker is disabled.
+
+  colorWheel:
+    description: ColorWheel allows users to select a color by rotating around a wheel of hues.
+    category: "input"
+    props:
+      aria-label:
+        type: string
+        description: Provides an accessible name for the ColorWheel.
+      value:
+        type: object
+        description: The current color value.
+      defaultValue:
+        type: object
+        description: The default color value when uncontrolled.
+      onChange:
+        type: function
+        description: Callback when the color changes.
+      disabled:
+        type: boolean
+        description: Whether the ColorWheel is disabled.
+      isReadOnly:
+        type: boolean
+        description: Whether the ColorWheel is read-only.
+
+  calendar:
+    description: Calendar allows users to view and select dates.
+    category: "input"
+    props:
+      aria-label:
+        type: string
+        description: Provides an accessible name for the calendar.
+      value:
+        type: object
+        description: The current selected date.
+      defaultValue:
+        type: object
+        description: The default selected date when uncontrolled.
+      onChange:
+        type: function
+        description: Callback when the selected date changes.
+      disabled:
+        type: boolean
+        description: Whether the calendar is disabled.
+      minValue:
+        type: object
+        description: The minimum allowed date.
+      maxValue:
+        type: object
+        description: The maximum allowed date.
+      isReadOnly:
+        type: boolean
+        description: Whether the calendar is read-only.
+      visibleMonths:
+        type: number
+        description: The number of visible months in the calendar.
+
+  dateField:
+    description: DateField allows users to enter and edit date values using individual fields for the day, month, and year.
+    category: "input"
+    props:
+      aria-label:
+        type: string
+        description: Provides an accessible name for the DateField.
+      value:
+        type: object
+        description: The current selected date.
+      defaultValue:
+        type: object
+        description: The default selected date when uncontrolled.
+      onChange:
+        type: function
+        description: Callback when the selected date changes.
+      disabled:
+        type: boolean
+        description: Whether the DateField is disabled.
+      minValue:
+        type: object
+        description: The minimum allowed date.
+      maxValue:
+        type: object
+        description: The maximum allowed date.
+      isReadOnly:
+        type: boolean
+        description: Whether the DateField is read-only.
+
+  datePicker:
+    description: DatePicker provides a dropdown calendar for selecting a date, with fields for manual entry.
+    category: "input"
+    props:
+      aria-label:
+        type: string
+        description: Provides an accessible name for the DatePicker.
+      value:
+        type: object
+        description: The current selected date.
+      defaultValue:
+        type: object
+        description: The default selected date when uncontrolled.
+      onChange:
+        type: function
+        description: Callback when the selected date changes.
+      disabled:
+        type: boolean
+        description: Whether the DatePicker is disabled.
+      minValue:
+        type: object
+        description: The minimum allowed date.
+      maxValue:
+        type: object
+        description: The maximum allowed date.
+      isReadOnly:
+        type: boolean
+        description: Whether the DatePicker is read-only.
+      placeholderValue:
+        type: object
+        description: Placeholder date to display when there is no selected value.
+
+  dateRangePicker:
+    description: DateRangePicker allows users to select a date range from a calendar.
+    category: "input"
+    props:
+      aria-label:
+        type: string
+        description: Provides an accessible name for the DateRangePicker.
+      value:
+        type: object
+        description: The current selected date range.
+      defaultValue:
+        type: object
+        description: The default selected date range when uncontrolled.
+      onChange:
+        type: function
+        description: Callback when the selected date range changes.
+      disabled:
+        type: boolean
+        description: Whether the DateRangePicker is disabled.
+      minValue:
+        type: object
+        description: The minimum allowed date.
+      maxValue:
+        type: object
+        description: The maximum allowed date.
+      isReadOnly:
+        type: boolean
+        description: Whether the DateRangePicker is read-only.
+      placeholderValue:
+        type: object
+        description: Placeholder date range to display when there is no selected value.
+
+  rangeCalendar:
+    description: RangeCalendar allows users to select a range of dates within a calendar view.
+    category: "input"
+    props:
+      aria-label:
+        type: string
+        description: Provides an accessible name for the RangeCalendar.
+      value:
+        type: object
+        description: The current selected date range.
+      defaultValue:
+        type: object
+        description: The default selected date range when uncontrolled.
+      onChange:
+        type: function
+        description: Callback when the selected date range changes.
+      disabled:
+        type: boolean
+        description: Whether the RangeCalendar is disabled.
+      minValue:
+        type: object
+        description: The minimum allowed date.
+      maxValue:
+        type: object
+        description: The maximum allowed date.
+      isReadOnly:
+        type: boolean
+        description: Whether the RangeCalendar is read-only.
+      visibleMonths:
+        type: number
+        description: The number of visible months in the calendar.
+
+  timeField:
+    description: TimeField allows users to input and edit time values with individual fields for hours, minutes, and optionally seconds.
+    category: "input"
+    props:
+      aria-label:
+        type: string
+        description: Provides an accessible name for the TimeField.
+      value:
+        type: object
+        description: The current selected time.
+      defaultValue:
+        type: object
+        description: The default selected time when uncontrolled.
+      onChange:
+        type: function
+        description: Callback when the selected time changes.
+      disabled:
+        type: boolean
+        description: Whether the TimeField is disabled.
+      minValue:
+        type: object
+        description: The minimum allowed time.
+      maxValue:
+        type: object
+        description: The maximum allowed time.
+      isReadOnly:
+        type: boolean
+        description: Whether the TimeField is read-only.
+
+  dropZone:
+    description: DropZone is a component that handles file dragging and dropping.
+    props:
+      isDisabled:
+        type: boolean
+        description: Disable the DropZone component.
+      onDrop:
+        type: function
+        description: Callback when files are dropped.
+      acceptedFormats:
+        type: array
+        description: List of accepted file formats.
+
+  checkbox:
+    description: Checkbox is used to allow users to select multiple options from a list.
+    props:
+      isSelected:
+        type: boolean
+        description: Determines if the checkbox is selected.
+      isDisabled:
+        type: boolean
+        description: Disables the checkbox.
+      onChange:
+        type: function
+        description: Callback when the checkbox state changes.
+
+  checkboxGroup:
+    description: CheckboxGroup is used to manage multiple checkboxes.
+    props:
+      value:
+        type: array
+        description: List of selected checkbox values.
+      isDisabled:
+        type: boolean
+        description: Disables the entire group.
+      onChange:
+        type: function
+        description: Callback when any checkbox state changes.
+
+  form:
+    description: Form is used to collect and submit data.
+    props:
+      onSubmit:
+        type: function
+        description: Callback when the form is submitted.
+      isDisabled:
+        type: boolean
+        description: Disable the form.
+      validationState:
+        type: string
+        enum: ["valid", "invalid"]
+        description: Set the validation state of the form.
+
+  numberField:
+    description: NumberField is a component for inputting numbers.
+    props:
+      value:
+        type: number
+        description: The current value of the input.
+      onChange:
+        type: function
+        description: Callback when the number changes.
+      isDisabled:
+        type: boolean
+        description: Disables the number input.
+      minValue:
+        type: number
+        description: The minimum allowable value.
+      maxValue:
+        type: number
+        description: The maximum allowable value.
+
+  radioGroup:
+    description: RadioGroup is used for selecting a single option from a set.
+    props:
+      value:
+        type: string
+        description: The selected value.
+      isDisabled:
+        type: boolean
+        description: Disables the group.
+      onChange:
+        type: function
+        description: Callback when the selected option changes.
+
+  rangeSlider:
+    description: RangeSlider allows users to select a range of values.
+    props:
+      value:
+        type: array
+        description: The current range of selected values.
+      onChange:
+        type: function
+        description: Callback when the range changes.
+      minValue:
+        type: number
+        description: The minimum value allowed.
+      maxValue:
+        type: number
+        description: The maximum value allowed.
+      isDisabled:
+        type: boolean
+        description: Disables the range slider.
+
+  searchField:
+    description: SearchField is used to enter and search for text.
+    props:
+      value:
+        type: string
+        description: The current value of the input.
+      onChange:
+        type: function
+        description: Callback when the search value changes.
+      onSearch:
+        type: function
+        description: Callback when the search is triggered.
+      isDisabled:
+        type: boolean
+        description: Disables the search field.
+
+  slider:
+    description: Slider allows users to select a single value from a range.
+    props:
+      value:
+        type: number
+        description: The current value of the slider.
+      onChange:
+        type: function
+        description: Callback when the slider value changes.
+      minValue:
+        type: number
+        description: The minimum value allowed.
+      maxValue:
+        type: number
+        description: The maximum value allowed.
+      isDisabled:
+        type: boolean
+        description: Disables the slider.
+
+  switch:
+    description: Switch is used to toggle between two states.
+    props:
+      isSelected:
+        type: boolean
+        description: Whether the switch is on or off.
+      onChange:
+        type: function
+        description: Callback when the switch state changes.
+      isDisabled:
+        type: boolean
+        description: Disables the switch.
+
+  textArea:
+    description: TextArea is a multi-line text input field.
+    props:
+      value:
+        type: string
+        description: The current value of the text area.
+      onChange:
+        type: function
+        description: Callback when the text area value changes.
+      isDisabled:
+        type: boolean
+        description: Disables the text area.
+      placeholder:
+        type: string
+        description: Placeholder text for the text area.
+
+  textField:
+    description: TextField is a single-line text input field.
+    props:
+      value:
+        type: string
+        description: The current value of the text field.
+      onChange:
+        type: function
+        description: Callback when the text field value changes.
+      isDisabled:
+        type: boolean
+        description: Disables the text field.
+      placeholder:
+        type: string
+        description: Placeholder text for the text field.

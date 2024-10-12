@@ -5,32 +5,1131 @@ homepage: "https://chakra-ui.com/"
 author: "Segun Adebayo"
 license: "MIT"
 components:
-  Button:
-    description: "Button component is used to trigger an action or event."
+  accordion:
+    description: Accordions display a list of high-level options that can expand/collapse to reveal more information.
+    group: accordion
     props:
+      allowMultiple:
+        type: boolean
+        description: Allows multiple accordion items to be expanded simultaneously.
+      allowToggle:
+        type: boolean
+        description: Allows expanded items to be collapsed again.
+      defaultIndex:
+        type: array
+        items:
+          type: integer
+        description: Specifies the index or indices of the initially expanded item(s). Should be an array if `allowMultiple` is set to true.
+      index:
+        type: integer
+        description: Controls which item is expanded.
+      reduceMotion:
+        type: boolean
+        description: Disables all motion for the accordion.
+      onChange:
+        type: object
+        properties:
+          index:
+            type: integer
+        description: Event handler that is called when the accordion is expanded or collapsed.
+
+  accordionItem:
+    description: A single item in the accordion.
+    parent: accordion
+    group: accordion
+    props:
+      isDisabled:
+        type: boolean
+        description: Disables the accordion item and prevents user interaction.
+      isFocusable:
+        type: boolean
+        description: Determines whether a disabled accordion item can still receive focus.
+      id:
+        type: string
+        description: The unique id of the accordion item, useful for accessibility.
+
+  accordionButton:
+    description: The button that toggles the accordion item’s expand/collapse state.
+    parent: accordionItem
+    group: accordion
+    props:
+      asChild:
+        type: boolean
+        default: false
+        description: Allows rendering a custom component as the button.
+      _expanded:
+        type: object
+        description: Styles applied when the accordion item is expanded.
+
+  accordionPanel:
+    description: The panel that contains the details revealed when an item is expanded.
+    parent: accordionItem
+    group: accordion
+    props:
+      pb:
+        type: string
+        description: Padding applied to the bottom of the panel.
+
+  accordionIcon:
+    description: An icon, typically a chevron, that rotates based on the expanded/collapsed state of the accordion item.
+    parent: accordionButton
+    group: accordion
+
+  alertDialog:
+    description: AlertDialog component is used to interrupt the user with a mandatory confirmation or action.
+    group: overlay
+    props:
+      isOpen:
+        type: boolean
+        description: Controls whether the alert dialog is open or closed.
+      leastDestructiveRef:
+        type: ref
+        description: A reference to the least destructive button (typically the cancel button) to set focus when the dialog opens.
+      onClose:
+        type: function
+        description: Callback fired when the alert dialog is closed.
+      isCentered:
+        type: boolean
+        description: If true, the modal will be centered on the screen.
+      motionPreset:
+        type: string
+        enum: ["slideInBottom", "slideInRight", "scale"]
+        description: The transition effect for the dialog. Defaults to `scale`.
+
+  alertDialogHeader:
+    description: The header for the alert dialog, typically contains the title.
+    parent: alertDialog
+    group: overlay
+
+  alertDialogBody:
+    description: The body of the alert dialog, typically contains the description.
+    parent: alertDialog
+    group: overlay
+
+  alertDialogFooter:
+    description: The footer for the alert dialog, typically contains the action buttons.
+    parent: alertDialog
+    group: overlay
+
+  alertDialogOverlay:
+    description: The dimmed overlay behind the alert dialog.
+    parent: alertDialog
+    group: overlay
+
+  alertDialogContent:
+    description: The wrapper for the content of the alert dialog.
+    parent: alertDialog
+    group: overlay
+
+  alertDialogCloseButton:
+    description: The button used to close the alert dialog.
+    parent: alertDialog
+    group: overlay
+
+  alert:
+    description: Alerts are used to communicate a state that affects a system, feature, or page.
+    group: feedback
+    props:
+      status:
+        type: string
+        enum: ["error", "success", "warning", "info"]
+        description: Defines the status of the alert, which determines its color scheme and icon.
       variant:
-        description: "The visual style of the button."
+        type: string
+        enum: ["subtle", "solid", "left-accent", "top-accent"]
+        description: Specifies the style variant for the alert.
+      flexDirection:
+        type: string
+        description: Allows customization of the layout direction for the alert content.
+      alignItems:
+        type: string
+        description: Controls how items are aligned within the alert.
+      justifyContent:
+        type: string
+        description: Adjusts the alignment of items along the main axis.
+      textAlign:
+        type: string
+        description: Specifies the text alignment inside the alert.
+      height:
+        type: string
+        description: Sets the height of the alert.
+
+  alertIcon:
+    description: The visual icon for the alert, which changes based on the status prop.
+    parent: alert
+    group: feedback
+    props:
+      boxSize:
+        type: string
+        description: Controls the size of the icon.
+
+  alertTitle:
+    description: The title of the alert, announced by screen readers.
+    parent: alert
+    group: feedback
+    props:
+      mt:
+        type: number
+        description: Sets the margin-top for the title.
+      mb:
+        type: number
+        description: Sets the margin-bottom for the title.
+      fontSize:
+        type: string
+        description: Sets the font size for the title.
+
+  alertDescription:
+    description: The description of the alert, announced by screen readers.
+    parent: alert
+    group: feedback
+    props:
+      maxWidth:
+        type: string
+        description: Sets the maximum width for the alert description.
+
+  closeButton:
+    description: A button to close the alert.
+    parent: alert
+    group: feedback
+    props:
+      alignSelf:
+        type: string
+        description: Aligns the button relative to itself within the alert layout.
+      position:
+        type: string
+        description: Sets the position of the close button.
+      right:
+        type: number
+        description: Specifies the right position for the button.
+      top:
+        type: number
+        description: Specifies the top position for the button.
+      onClick:
+        type: function
+        description: Function to handle the close event.
+
+  aspectRatio:
+    description: AspectRatio component is used to embed responsive videos, images, and maps, maintaining a consistent aspect ratio.
+    category: layout
+    props:
+      ratio:
+        type: number
+        description: Specifies the aspect ratio to maintain for the content. For example, `16/9` for a widescreen video.
+      maxW:
+        type: string
+        description: Sets the maximum width of the container to control the width of the content.
+      children:
+        type: element
+        description: The content to display inside the `AspectRatio` component. This can be an iframe, image, or other media.
+
+  avatar:
+    description: The Avatar component is used to represent a user and displays the profile picture, initials, or fallback icon.
+    category: media-and-icons
+    props:
+      src:
+        type: string
+        description: The image source URL for the avatar.
+      name:
+        type: string
+        description: The name of the user, used to generate initials if the image source fails to load.
+      size:
+        type: string
+        enum: ["2xs", "xs", "sm", "md", "lg", "xl", "2xl"]
+        description: Specifies the size of the avatar. Options include '2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl'.
+      bg:
+        type: string
+        description: The background color of the avatar or the fallback when initials are displayed.
+      icon:
+        type: string
+        description: Custom icon to display as the avatar's fallback when there is no name or src provided.
+      children:
+        type: element
+        description: Elements such as badges or custom content to be displayed inside the avatar.
+      getInitials:
+        type: string
+        description: Custom logic to manage how initials are generated from the provided name.
+
+  avatarBadge:
+    description: A wrapper that displays a badge on the avatar, usually indicating status.
+    category: media-and-icons
+    props:
+      boxSize:
+        type: string
+        description: Specifies the size of the badge relative to the avatar size.
+      bg:
+        type: string
+        description: The background color of the badge.
+      borderColor:
+        type: string
+        description: The color of the border around the badge.
+
+  avatarGroup:
+    description: A wrapper to stack multiple avatars together, with optional truncation.
+    category: media-and-icons
+    props:
+      max:
+        type: number
+        description: Limits the number of visible avatars and shows a "+X" label for the remaining avatars.
+      size:
+        type: string
+        enum: ["2xs", "xs", "sm", "md", "lg", "xl", "2xl"]
+        description: Specifies the size of all avatars in the group.
+      spacing:
+        type: string
+        description: Controls the spacing between the avatars in the group.
+      children:
+        type: array
+        items:
+          type: element
+        description: A collection of Avatar components to be displayed in the group.
+
+  badge:
+    description: The Badge component is used to highlight an item's status for quick recognition.
+    category: data-display
+    props:
+      colorScheme:
+        type: string
+        description: Specifies the color of the Badge. It accepts any color key from the theme.
+      variant:
+        type: string
+        enum: ["subtle", "solid", "outline"]
+        description: Defines the style variant of the Badge. Options are 'subtle', 'solid', and 'outline'.
+      fontSize:
+        type: string
+        description: Sets the font size of the Badge. Useful for customizing the size relative to surrounding text or components.
+      children:
+        type: string
+        description: The content inside the Badge.
+
+  box:
+    description: Box is a highly flexible component used to create layouts, apply styles via props, and render various HTML elements using the 'as' prop. It is the foundation of all other Chakra UI components.
+    category: layout
+    props:
+      bg:
+        type: string
+        description: Background color shorthand. Accepts any color key from the theme or a custom color value.
+      w:
+        type: string | number
+        description: Width of the Box. Can accept responsive values.
+      p:
+        type: string | number
+        description: Padding inside the Box. Can accept responsive values.
+      color:
+        type: string
+        description: Text color of the Box content. Accepts any color key from the theme or a custom color value.
+      maxW:
+        type: string | number
+        description: The maximum width of the Box. Can accept responsive values.
+      borderWidth:
+        type: string | number
+        description: Width of the border around the Box. Can be used for styling purposes.
+      borderRadius:
+        type: string | number
+        description: Defines the border radius of the Box, controlling the corner roundness.
+      overflow:
+        type: string
+        description: Sets the overflow behavior for the Box content. Common values are 'hidden', 'scroll', and 'visible'.
+      as:
+        type: string
+        description: Used to change the HTML element rendered by the Box. For example, 'button', 'h1', 'section', etc.
+      display:
+        type: string
+        description: CSS display property. Defines the Box's display behavior, like 'flex', 'inline-block', etc.
+      alignItems:
+        type: string
+        description: Defines how items are aligned within a flexbox or grid container.
+      justifyContent:
+        type: string
+        description: Defines how space is distributed between items in a flexbox or grid container.
+      fontWeight:
+        type: string
+        description: Controls the font weight of the text inside the Box.
+      fontSize:
+        type: string | number
+        description: Sets the size of the font inside the Box.
+      textTransform:
+        type: string
+        description: Controls the capitalization of the text inside the Box, such as 'uppercase' or 'lowercase'.
+      lineHeight:
+        type: string | number
+        description: Sets the line height of the text inside the Box.
+      noOfLines:
+        type: number
+        description: Limits the number of lines of text inside the Box before truncating with an ellipsis.
+      letterSpacing:
+        type: string | number
+        description: Sets the spacing between the letters in the text inside the Box.
+      ml:
+        type: string | number
+        description: Sets the left margin of the Box. Can accept responsive values.
+      mt:
+        type: string | number
+        description: Sets the top margin of the Box. Can accept responsive values.
+      h:
+        type: string | number
+        description: Height of the Box. Can accept responsive values.
+
+  breadcrumb:
+    description: Breadcrumb is a navigation component that helps users understand the hierarchy of a website.
+    category: navigation
+    props:
+      separator:
+        type: string | object
+        description: Custom separator between breadcrumb items. It can be a string or an icon component.
+      spacing:
+        type: string | number
+        description: Spacing between breadcrumb items. It accepts any valid CSS spacing values.
+      fontWeight:
+        type: string
+        description: Sets the font weight of the breadcrumb items. It accepts any valid CSS font weight value.
+      fontSize:
+        type: string | number
+        description: Sets the font size of the breadcrumb items. It accepts any valid CSS font size value.
+      isCurrentPage:
+        type: boolean
+        description: Marks the `BreadcrumbItem` as the current page. Adds `aria-current=page` to the `BreadcrumbLink`.
+      as:
+        type: string
+        description: Allows the `BreadcrumbLink` to render another component such as `Link` from a routing library. Use this to integrate with routing.
+
+  button:
+    description: Button component is used to trigger an action or event, such as submitting a form, opening a dialog, canceling an action, or performing a delete operation.
+    category: form
+    props:
+      size:
+        type: string
+        enum: ["xs", "sm", "md", "lg"]
+        description: Change the size of the button.
+      variant:
         type: string
         enum: ["solid", "outline", "ghost", "link"]
-      size:
-        description: "The size of the button."
-        type: string
-        enum: ["xs", "sm", "md", "lg"]
+        description: Change the visual style of the button.
       colorScheme:
-        description: "The color scheme of the button."
         type: string
-  Input:
-    description: "The Input component is a component that is used to get user input in a text field."
+        description: Define the color scheme of the button, supporting any color key in the theme.
+      isLoading:
+        type: boolean
+        description: If true, the button will show a loading spinner.
+      loadingText:
+        type: string
+        description: Text displayed when the button is in the loading state.
+      spinner:
+        type: object
+        description: Custom spinner element to use when isLoading is true.
+      spinnerPlacement:
+        type: string
+        enum: ["start", "end"]
+        description: Position of the spinner when loadingText is present.
+      leftIcon:
+        type: object
+        description: Add a left icon to the button.
+      rightIcon:
+        type: object
+        description: Add a right icon to the button.
+      isDisabled:
+        type: boolean
+        description: If true, the button will be disabled.
+      isFullWidth:
+        type: boolean
+        description: If true, the button will take up the full width of its container.
+      onClick:
+        type: function
+        description: Function to call when the button is clicked.
+
+  card:
+    description: Card is a flexible component used to group and display content in a clear and concise format.
+    category: data-display
     props:
       variant:
-        description: "The visual style of the input."
         type: string
-        enum: ["outline", "filled", "flushed", "unstyled"]
+        enum: ["elevated", "outline", "filled", "unstyled"]
+        description: Define the visual style of the card.
       size:
-        description: "The size of the input."
+        type: string
+        enum: ["sm", "md", "lg"]
+        description: Define the size of the card.
+      align:
+        type: string
+        enum: ["center", "start", "end"]
+        description: Align the content of the card.
+      direction:
+        type: object
+        description: Define the direction of the card content. Can be responsive, using different values for base and small screen sizes.
+      maxW:
+        type: string
+        description: Define the maximum width of the card.
+      overflow:
+        type: string
+        description: Define how the card should handle overflow content.
+      justify:
+        type: string
+        description: Justify the content in the footer of the card.
+
+  cardHeader:
+    description: The wrapper that contains a card's header, often used to display titles or headings.
+    props:
+      padding:
+        type: string
+        description: Define padding around the header.
+      bg:
+        type: string
+        description: Background color for the header.
+      align:
+        type: string
+        enum: ["center", "start", "end"]
+        description: Align the content inside the header.
+
+  cardBody:
+    description: The wrapper that houses the main content of the card.
+    props:
+      padding:
+        type: string
+        description: Define padding around the card body.
+      bg:
+        type: string
+        description: Background color for the card body.
+      spacing:
+        type: string
+        description: Define spacing between elements inside the body.
+
+  cardFooter:
+    description: The footer that houses the card actions, like buttons or links.
+    props:
+      padding:
+        type: string
+        description: Define padding around the footer.
+      bg:
+        type: string
+        description: Background color for the footer.
+      justify:
+        type: string
+        enum: ["center", "start", "end", "space-between"]
+        description: Justify the content inside the footer.
+
+  cardImage:
+    description: Image element used inside the card body.
+    props:
+      src:
+        type: string
+        description: The URL of the image.
+      alt:
+        type: string
+        description: The alt text for the image.
+      objectFit:
+        type: string
+        enum: ["cover", "fill", "contain", "none", "scale-down"]
+        description: How the image should fit inside the card.
+
+  cardDivider:
+    description: A divider to visually separate sections of the card.
+    props:
+      orientation:
+        type: string
+        enum: ["horizontal", "vertical"]
+        description: Orientation of the divider.
+      thickness:
+        type: string
+        description: Thickness of the divider.
+      color:
+        type: string
+        description: The color of the divider.
+
+  center:
+    description: Center is a layout component that centers its child within itself.
+    category: layout
+    props:
+      h:
+        type: string
+        description: Define the height of the center container.
+      w:
+        type: string
+        description: Define the width of the center container.
+      bg:
+        type: string
+        description: Define the background color of the center container.
+      color:
+        type: string
+        description: Define the text color inside the center container.
+      p:
+        type: string
+        description: Define the padding around the center container.
+      alignItems:
+        type: string
+        enum: ["center", "flex-start", "flex-end"]
+        description: Align items within the container.
+
+  square:
+    description: Square is a layout component that centers its child within a square, given a specific size.
+    category: layout
+    props:
+      size:
+        type: string
+        description: Define the width and height of the square.
+      bg:
+        type: string
+        description: Define the background color of the square.
+      color:
+        type: string
+        description: Define the text color inside the square.
+      p:
+        type: string
+        description: Define the padding around the square.
+
+  circle:
+    description: Circle is a layout component that centers its child within a circle, given a specific size.
+    category: layout
+    props:
+      size:
+        type: string
+        description: Define the width and height of the circle.
+      bg:
+        type: string
+        description: Define the background color of the circle.
+      color:
+        type: string
+        description: Define the text color inside the circle.
+      p:
+        type: string
+        description: Define the padding around the circle.
+      borderRadius:
+        type: string
+        default: "full"
+        description: Set to "full" for a perfect circle shape.
+
+  absoluteCenter:
+    description: AbsoluteCenter is a layout component that centers its child relative to its parent using absolute positioning.
+    category: layout
+    props:
+      axis:
+        type: string
+        enum: ["both", "horizontal", "vertical"]
+        description: Define which axis the child should be centered on.
+      bg:
+        type: string
+        description: Define the background color of the absolute center container.
+      p:
+        type: string
+        description: Define the padding around the absolute center container.
+      color:
+        type: string
+        description: Define the text color inside the absolute center container.
+      position:
+        type: string
+        default: "absolute"
+        description: Define the positioning type of the element, usually set to 'absolute'.
+
+  checkbox:
+    description: Checkbox component is used in forms when a user needs to select multiple values from several options.
+    category: form
+    props:
+      defaultChecked:
+        type: boolean
+        description: Defines if the checkbox is checked by default.
+      isDisabled:
+        type: boolean
+        description: Sets the checkbox as disabled.
+      colorScheme:
+        type: string
+        description: Defines the color scheme for the checkbox, based on theme colors.
+      size:
+        type: string
+        enum: ["sm", "md", "lg"]
+        description: Defines the size of the checkbox.
+      isInvalid:
+        type: boolean
+        description: Marks the checkbox as invalid.
+      spacing:
+        type: string
+        description: Defines the spacing between the checkbox and its label.
+      iconColor:
+        type: string
+        description: Sets the color of the check icon inside the checkbox.
+      iconSize:
+        type: string
+        description: Defines the size of the check icon inside the checkbox.
+      isIndeterminate:
+        type: boolean
+        description: Sets the checkbox in an indeterminate state.
+      isChecked:
+        type: boolean
+        description: Controls whether the checkbox is checked.
+      onChange:
+        type: function
+        description: Callback fired when the checked state of the checkbox changes.
+
+  checkboxGroup:
+    description: A component to help manage the checked state of its child checkboxes.
+    props:
+      defaultValue:
+        type: array
+        description: Default value of the group, when uncontrolled.
+      value:
+        type: array
+        description: Value of the group, when controlled.
+      colorScheme:
+        type: string
+        description: Defines the color scheme for the group, based on theme colors.
+      size:
+        type: string
+        enum: ["sm", "md", "lg"]
+        description: Defines the size of the checkboxes in the group.
+      onChange:
+        type: function
+        description: Callback fired when the checked state of any checkbox in the group changes.
+      direction:
+        type: string
+        enum: ["column", "row"]
+        description: Defines the layout direction for the checkboxes in the group.
+      spacing:
+        type: string
+        description: Defines the spacing between the checkboxes in the group.
+
+  circularProgress:
+    description: Circular Progress is used to indicate the progress for determinate and indeterminate processes.
+    category: feedback
+    props:
+      value:
+        type: number
+        description: The value of the progress indicator, from 0 to 100. Required for determinate progress.
+      size:
+        type: string
+        description: Defines the size of the circular progress indicator.
+      thickness:
+        type: string
+        description: Defines the thickness of the progress ring.
+      color:
+        type: string
+        description: Sets the color of the progress indicator.
+      isIndeterminate:
+        type: boolean
+        description: Activates the indeterminate state of the progress indicator when the value is not known upfront.
+
+  circularProgressLabel:
+    description: A component that renders a label inside the circular progress indicator.
+    props:
+      children:
+        type: string
+        description: The text or value to be displayed inside the progress indicator.
+
+  code:
+    description: Code is a component used to display inline code. It is composed from the Box component with a font family of `mono` for displaying code.
+    category: data-display
+    props:
+      colorScheme:
+        type: string
+        description: Change the color scheme of the code block.
+
+  container:
+    description: Containers are used to constrain a content's width to the current breakpoint, while keeping it fluid.
+    category: layout
+    props:
+      maxW:
+        type: string
+        description: Define the maximum width of the container. Can be a custom value or a size token from the theme.
+      centerContent:
+        type: boolean
+        description: Centers the children content within the container using flexbox.
+
+  divider:
+    description: Dividers are used to visually separate content in a list or group.
+    category: data-display
+    props:
+      orientation:
+        type: string
+        enum: ["horizontal", "vertical"]
+        description: Define the orientation of the divider.
+      height:
+        type: string
+        description: Define the height of the divider when used in vertical orientation.
+      color:
+        type: string
+        description: Define the color of the divider.
+      borderColor:
+        type: string
+        description: Set the border color of the divider.
+
+  drawer:
+    description: The Drawer component is a panel that slides out from the edge of the screen. It is useful for tasks or viewing details without leaving the current page.
+    category: overlay
+    props:
+      isOpen:
+        type: boolean
+        description: Controls whether the drawer is open or closed.
+      placement:
+        type: string
+        enum: ["top", "right", "bottom", "left"]
+        description: The position from which the drawer will slide in.
+      size:
+        type: string
+        enum: ["xs", "sm", "md", "lg", "xl", "full"]
+        description: The size of the drawer.
+      onClose:
+        type: function
+        description: A function to close the drawer.
+      initialFocusRef:
+        type: object
+        description: Ref for the first element that should receive focus when the drawer opens.
+      finalFocusRef:
+        type: object
+        description: Ref for the element that will receive focus when the drawer closes.
+
+  drawerHeader:
+    description: Contains the header section of the drawer, typically used for titles.
+    props:
+      borderBottomWidth:
+        type: string
+        description: Set the width of the border at the bottom of the header.
+      children:
+        type: any
+        description: The content of the header, usually a title.
+
+  drawerBody:
+    description: Contains the body content of the drawer.
+    props:
+      padding:
+        type: string
+        description: Define padding around the drawer body.
+
+  drawerFooter:
+    description: Contains the footer content of the drawer, typically for action buttons.
+    props:
+      borderTopWidth:
+        type: string
+        description: Set the width of the border at the top of the footer.
+      children:
+        type: any
+        description: The content of the footer, usually action buttons.
+
+  drawerOverlay:
+    description: The overlay that dims the background when the drawer is open.
+
+  drawerContent:
+    description: The main content area of the drawer, which wraps the header, body, and footer.
+    props:
+      children:
+        type: any
+        description: The content inside the drawer.
+
+  drawerCloseButton:
+    description: A button used to close the drawer.
+    props:
+      size:
+        type: string
+        enum: ["sm", "md", "lg"]
+        description: The size of the close button.
+
+  editable:
+    description: Editable is used for inline renaming of text. It displays as normal text but transforms into a text input field when clicked or focused.
+    category: form
+    props:
+      defaultValue:
+        type: string
+        description: The initial value of the editable component.
+      isPreviewFocusable:
+        type: boolean
+        description: If true, the preview remains focusable while not in edit mode.
+      textAlign:
+        type: string
+        enum: ["left", "center", "right"]
+        description: The alignment of the text inside the editable component.
+      fontSize:
+        type: string
+        description: The font size of the text.
+      onSubmit:
+        type: function
+        description: Callback invoked when the input is submitted.
+      onCancel:
+        type: function
+        description: Callback invoked when the input is canceled.
+
+  editableInput:
+    description: The editable input component, which is shown when the user enters edit mode.
+    props:
+      placeholder:
+        type: string
+        description: Placeholder text displayed in the input field when it's empty.
+      isDisabled:
+        type: boolean
+        description: If true, the input is disabled.
+      value:
+        type: string
+        description: The current value of the input.
+
+  editableTextarea:
+    description: EditableTextarea allows multiline text input within an editable context.
+    props:
+      placeholder:
+        type: string
+        description: Placeholder text displayed in the textarea when it's empty.
+      isDisabled:
+        type: boolean
+        description: If true, the textarea is disabled.
+      value:
+        type: string
+        description: The current value of the textarea.
+
+  editablePreview:
+    description: Displays the read-only view of the editable component before the user clicks to edit.
+    props:
+      as:
+        type: string
+        description: The HTML element or custom component to be used as the preview.
+      color:
+        type: string
+        description: The color of the preview text.
+
+  editableControls:
+    description: Custom control buttons for submitting, canceling, or editing the editable component.
+    props:
+      getSubmitButtonProps:
+        type: function
+        description: Returns props for the submit button.
+      getCancelButtonProps:
+        type: function
+        description: Returns props for the cancel button.
+      getEditButtonProps:
+        type: function
+        description: Returns props for the edit button.
+
+  flex:
+    description: Flex is a Box with display set to flex and provides shorthand props for flex properties. It renders a div element.
+    category: layout
+    props:
+      direction:
+        type: string
+        description: Defines the direction of flex items. Shorthand for flexDirection.
+        enum: ["row", "row-reverse", "column", "column-reverse"]
+      wrap:
+        type: string
+        description: Defines how flex items wrap. Shorthand for flexWrap.
+        enum: ["nowrap", "wrap", "wrap-reverse"]
+      basis:
+        type: string
+        description: Defines the initial size of a flex item. Shorthand for flexBasis.
+      grow:
+        type: number
+        description: Defines how much a flex item should grow relative to the rest. Shorthand for flexGrow.
+      shrink:
+        type: number
+        description: Defines how much a flex item should shrink relative to the rest. Shorthand for flexShrink.
+      align:
+        type: string
+        description: Aligns flex items along the cross axis. Shorthand for alignItems.
+        enum: ["stretch", "center", "start", "end", "baseline"]
+      justify:
+        type: string
+        description: Justifies flex items along the main axis. Shorthand for justifyContent.
+        enum:
+          [
+            "flex-start",
+            "flex-end",
+            "center",
+            "space-between",
+            "space-around",
+            "space-evenly",
+          ]
+      gap:
+        type: string
+        description: Defines the gap between flex items.
+      minWidth:
+        type: string
+        description: Defines the minimum width of the flex container.
+      alignItems:
+        type: string
+        description: Aligns flex items along the cross axis.
+      justifyContent:
+        type: string
+        description: Justifies flex items along the main axis.
+
+  spacer:
+    description: Spacer creates an adjustable empty space to tune the spacing between child elements in a Flex container.
+    props:
+      flex:
+        type: string
+        description: Defines the flex grow, shrink, and basis properties of the Spacer.
+
+  formControl:
+    description: FormControl provides context such as `isInvalid`, `isDisabled`, and `isRequired` to form elements.
+    category: form
+    props:
+      isInvalid:
+        type: boolean
+        description: Indicates if the form field is in an invalid state.
+      isDisabled:
+        type: boolean
+        description: Indicates if the form field is disabled.
+      isRequired:
+        type: boolean
+        description: Indicates if the form field is required.
+      isReadOnly:
+        type: boolean
+        description: Indicates if the form field is read-only.
+      id:
+        type: string
+        description: A unique identifier for the form input, associated with the label and helper text.
+      as:
+        type: string
+        description: Allows the FormControl to be rendered as a different HTML element.
+
+  formLabel:
+    description: The label of a form section, similar to the HTML label element.
+    props:
+      htmlFor:
+        type: string
+        description: Associates the label with an input field.
+      isDisabled:
+        type: boolean
+        description: Styles the label when the input is disabled.
+      isFocused:
+        type: boolean
+        description: Styles the label when the input is focused.
+      isInvalid:
+        type: boolean
+        description: Styles the label when the input is in an invalid state.
+
+  formHelperText:
+    description: Provides additional information or instructions about the form field.
+    props:
+      id:
+        type: string
+        description: Associates the helper text with the form input for accessibility purposes.
+
+  formErrorMessage:
+    description: Displays an error message when the form field is in an invalid state.
+    props:
+      id:
+        type: string
+        description: Associates the error message with the form input for accessibility purposes.
+      isInvalid:
+        type: boolean
+        description: Controls the visibility of the error message based on the form field’s invalid state.
+
+  grid:
+    description: Grid is a layout component for managing grid layouts.
+    category: layout
+    props:
+      templateColumns:
+        type: string
+        description: Defines the number of columns in the grid and their widths.
+      templateRows:
+        type: string
+        description: Defines the number of rows in the grid and their heights.
+      templateAreas:
+        type: string
+        description: Defines named grid areas for the layout, using a space-separated grid-template-areas string.
+      gap:
+        type: string
+        description: Sets the spacing between rows and columns.
+      rowGap:
+        type: string
+        description: Sets the vertical spacing between rows.
+      columnGap:
+        type: string
+        description: Sets the horizontal spacing between columns.
+      autoFlow:
+        type: string
+        description: Controls how auto-placed items are inserted into the grid.
+
+  gridItem:
+    description: Used as a child of `Grid` to control the span and start positions within the grid.
+    props:
+      colSpan:
+        type: number
+        description: Specifies how many columns the grid item should span.
+      rowSpan:
+        type: number
+        description: Specifies how many rows the grid item should span.
+      colStart:
+        type: number
+        description: Specifies the starting grid line for the grid item on the horizontal axis.
+      colEnd:
+        type: number
+        description: Specifies the ending grid line for the grid item on the horizontal axis.
+      rowStart:
+        type: number
+        description: Specifies the starting grid line for the grid item on the vertical axis.
+      rowEnd:
+        type: number
+        description: Specifies the ending grid line for the grid item on the vertical axis.
+      area:
+        type: string
+        description: Assigns the grid item to a named grid area.
+
+  heading:
+    description: Heading is used to render semantic HTML heading elements.
+    category: typography
+    props:
+      as:
+        type: string
+        enum: ["h1", "h2", "h3", "h4", "h5", "h6"]
+        description: Specifies the HTML tag for the heading.
+      size:
+        type: string
+        enum: ["xs", "sm", "md", "lg", "xl", "2xl", "3xl", "4xl"]
+        description: Adjusts the visual size of the heading.
+      noOfLines:
+        type: number
+        description: Limits the heading to a specific number of lines, adding an ellipsis if truncated.
+      fontSize:
+        type: string
+        description: Overrides the font size of the heading.
+      textAlign:
+        type: string
+        enum: ["left", "right", "center", "justify"]
+        description: Specifies the alignment of the heading text.
+      color:
+        type: string
+        description: Sets the color of the heading text.
+      fontWeight:
+        type: string
+        description: Specifies the font weight for the heading.
+      lineHeight:
+        type: string
+        description: Defines the line height of the heading.
+      letterSpacing:
+        type: string
+        description: Sets the spacing between letters in the heading text.
+
+  highlight:
+    description: Highlight allows you to highlight substrings of a text.
+    category: typography
+    props:
+      query:
+        type: [string, array]
+        description: The word or array of words to highlight. The query is case-insensitive.
+      styles:
+        type: object
+        description: Custom styles to apply to the highlighted text, such as padding, background color, or border-radius.
+      as:
+        type: string
+        description: The HTML element to render the highlight text as. Defaults to a span.
+
+  iconButton:
+    description: Icon button renders an icon within a button. It accepts most of the props from the Button component, but renders only an icon. Requires the aria-label prop for accessibility.
+    category: form
+    props:
+      ariaLabel:
+        type: string
+        required: true
+        description: Provides a label for screen readers to describe the button.
+      icon:
+        type: element
+        required: true
+        description: The icon to be displayed inside the button.
+      colorScheme:
+        type: string
+        description: The color scheme of the button.
+      size:
         type: string
         enum: ["xs", "sm", "md", "lg"]
-      type:
-        description: "The type of the input field."
+        description: The size of the button.
+      variant:
         type: string
-        enum: ["text", "password", "email", "number"]
+        enum: ["solid", "outline", "ghost", "link"]
+        description: The visual style of the button.
+      isRound:
+        type: boolean
+        description: If true, makes the button perfectly round.
+      fontSize:
+        type: string
+        description: Custom font size for the icon inside the button.

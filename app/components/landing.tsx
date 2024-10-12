@@ -7,15 +7,27 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 import shadcnSpec from "../../specs/shadcn/openui-sample.yaml";
-import muiSpec from "../../specs/material-ui/openui.yaml";
-import chakraSpec from "../../specs/chakra-ui/openui.yaml";
+import muiSpec from "../../specs/material-ui/openui-sample.yaml";
+import chakraSpec from "../../specs/chakra-ui/openui-sample.yaml";
 import spectrumSpec from "../../specs/react-spectrum/openui.yaml";
 
 const librarySpecs = {
-  "shadcn/ui": shadcnSpec,
-  "Material UI": muiSpec,
-  "Chakra UI": chakraSpec,
-  Spectrum: spectrumSpec,
+  "shadcn/ui": {
+    spec: shadcnSpec,
+    url: "/specs/shadcn-ui",
+  },
+  "Material UI": {
+    spec: muiSpec,
+    url: "/specs/material-ui",
+  },
+  "Chakra UI": {
+    spec: chakraSpec,
+    url: "/specs/chakra-ui",
+  },
+  Spectrum: {
+    spec: spectrumSpec,
+    url: "/specs/react-spectrum",
+  },
 };
 
 export default function OpenUILandingPage() {
@@ -35,9 +47,7 @@ export default function OpenUILandingPage() {
         </section>
 
         <section className="mb-12">
-          <h2 className="text-2xl font-semibold mb-4">
-            OpenUI Component Specifications
-          </h2>
+          <h2 className="text-2xl font-semibold mb-4">Sample OpenUI Specs</h2>
           <p className="mb-4">
             Toggle between different UI libraries to see how OpenUI standardizes
             their component specifications:
@@ -54,8 +64,11 @@ export default function OpenUILandingPage() {
                 </TabsTrigger>
               ))}
             </TabsList>
-            {Object.entries(librarySpecs).map(([library, spec]) => (
-              <TabsContent key={library} value={library}>
+            <Link className="ml-4" href="/specs">
+              View All
+            </Link>
+            {Object.entries(librarySpecs).map(([libraryName, library]) => (
+              <TabsContent key={libraryName} value={libraryName}>
                 <div className="bg-white rounded-lg overflow-hidden">
                   <SyntaxHighlighter
                     language="yaml"
@@ -68,9 +81,12 @@ export default function OpenUILandingPage() {
                     }}
                     wrapLongLines={false}
                   >
-                    {spec}
+                    {library.spec}
                   </SyntaxHighlighter>
                 </div>
+                <Link className="ml-4" href={library.url}>
+                  Show Full Spec
+                </Link>
               </TabsContent>
             ))}
           </Tabs>

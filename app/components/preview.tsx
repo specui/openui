@@ -107,7 +107,7 @@ export function Preview({
         </TabsContent>
       </Tabs>
       <div className="gap-4 hidden md:flex">
-        <div className="border border-gray-700 rounded-xl max-h-[calc(100vh-200px)] overflow-scroll w-1/2">
+        <div className="border border-gray-700 rounded-xl max-h-[calc(100vh-260px)] overflow-scroll w-1/2">
           <SyntaxHighlighter
             language="yaml"
             style={atomDark}
@@ -122,7 +122,7 @@ export function Preview({
             {specString}
           </SyntaxHighlighter>
         </div>
-        <div className="max-h-[calc(100vh-200px)] overflow-scroll w-1/2">
+        <div className="max-h-[calc(100vh-260px)] overflow-scroll w-1/2">
           <Content spec={spec} />
         </div>
       </div>
